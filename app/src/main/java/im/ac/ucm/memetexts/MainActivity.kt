@@ -58,6 +58,35 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
     var selected: String = "any"
     override fun onItemSelected(parent: AdapterView<*>, view: View?, pos: Int, id: Long){
         selected = parent.getItemAtPosition(pos).toString()
-        Log.wtf("selected", selected)
+        //Log.wtf("selected", selected)
+    }
+
+    override fun onNothingSelected(parent: AdapterView<*>?) {
+        TODO("Not yet implemented")
+    }
+
+    fun buttonClick(view: View){
+        var url = "https://meme-api.com/gimme/"
+        if(selected != "any"){
+            url += selected;
+        }
+        val vm = VolleyManager(this)
+        vm.call(
+            url
+        ) { response ->
+            Meme(
+                response.toString(),
+                binding.mainContent.textView,
+                binding.mainContent.button,
+                binding.mainContent.imageView
+            )
+        }
+
+        val twilio_url = "https://meme-1374.twil.io/send?msgtext=hello"
+        vm.call(
+            twilio_url
+        ) { response ->
+            Log.wtf("success", response.toString())
+        }
     }
 }
