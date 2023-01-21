@@ -11,4 +11,6 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
 
     <string name="img_display_failed">Image display failed. Try again</string>
+    <string name="get_meme_button">Get meme</string>
+    <string name="meme_start_text">Hit \"Get Meme\" button to start</string>
 </resources>

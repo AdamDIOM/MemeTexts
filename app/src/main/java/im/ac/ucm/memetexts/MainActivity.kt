@@ -1,6 +1,7 @@
 package im.ac.ucm.memetexts
 
 import android.os.Bundle
+import android.util.Log
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
@@ -9,9 +10,12 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import im.ac.ucm.memetexts.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
@@ -24,14 +28,15 @@ class MainActivity : AppCompatActivity() {
 
         setSupportActionBar(binding.toolbar)
 
-        val navController = findNavController(R.id.nav_host_fragment_content_main)
-        appBarConfiguration = AppBarConfiguration(navController.graph)
-        setupActionBarWithNavController(navController, appBarConfiguration)
-
         binding.fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
         }
+
+        val options = arrayOf("any", "memes", "me_irl", "dankmemes")
+
+        binding.mainContent.spinner.adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, options)
+        binding.mainContent.spinner.onItemSelectedListener = this
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -50,9 +55,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    override fun onSupportNavigateUp(): Boolean {
-        val navController = findNavController(R.id.nav_host_fragment_content_main)
-        return navController.navigateUp(appBarConfiguration)
-                || super.onSupportNavigateUp()
+    var selected: String = "any"
+    override fun onItemSelected(parent: AdapterView<*>, view: View?, pos: Int, id: Long){
+        selected = parent.getItemAtPosition(pos).toString()
+        Log.wtf("selected", selected)
     }
 }
