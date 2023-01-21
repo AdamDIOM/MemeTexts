@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">MemeTexts</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_view_db">View Database</string>
+    <string name="action_return">Return</string>
     <!-- Strings used for fragments for navigation -->
 
     <string name="img_display_failed">Image display failed. Try again</string>

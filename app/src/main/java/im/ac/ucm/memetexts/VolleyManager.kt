@@ -10,13 +10,14 @@ import com.android.volley.toolbox.Volley
 class VolleyManager (context: Context){
     private val q = Volley.newRequestQueue(context)
 
-    fun call(API_URL: String, listener: Response.Listener<org.json.JSONObject>){
+    fun call(API_URL: String, listener: Response.Listener<org.json.JSONObject>, failListener: Response.ErrorListener?){
         val jOR = JsonObjectRequest(
             Request.Method.GET,
             API_URL,
             null,
-            listener
-        ) { response -> Log.wtf("fail", "fail on $response") }
+            listener,
+            failListener
+        )
         q.add(jOR)
     }
 }
