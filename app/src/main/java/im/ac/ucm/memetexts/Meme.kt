@@ -6,51 +6,57 @@ import org.json.JSONObject
 import java.io.IOException
 import java.net.URL
 
-class Meme(jsonData: String, tView: android.widget.TextView, buttonParam: android.widget.Button, img: android.widget.ImageView ): AppCompatActivity(){
+class Meme(t: String, pL: String, u: String, n: Boolean): AppCompatActivity(){
 
     private val title: String
     private val postLink: String
     private val imgUrl: String
     private val nsfw: Boolean
-    private val button: android.widget.Button
-    private val imgView: android.widget.ImageView
-    private val textView: android.widget.TextView
 
     init {
-        val jsonObject = JSONObject(jsonData)
-        title = jsonObject["title"].toString()
-        postLink = jsonObject["postLink"].toString()
-        imgUrl = jsonObject["url"].toString()
-        nsfw = jsonObject["nsfw"].toString() == "true"
-        button = buttonParam
-        imgView = img
-        textView = tView
+        title = t
+        postLink = pL
+        imgUrl = u
+        nsfw = n
 
-        if(isNsfw()){
-            button.callOnClick()
-        }
-        else{
-            postImage()
-        }
+
     }
+
+    constructor(jsonData: String) : this(
+        JSONObject(jsonData)["title"].toString(),
+        JSONObject(jsonData)["postLink"].toString(),
+        JSONObject(jsonData)["url"].toString(),
+        JSONObject(jsonData)["nsfw"].toString() == "true"
+    )
 
     fun isNsfw(): Boolean {
         return nsfw
     }
 
-    private fun postImage() {
+    fun getPostTitle(): String {
+        return title
+    }
+    fun getPostLink(): String {
+        return postLink
+    }
+    fun getImgUrl(): String {
+        return imgUrl
+    }
+
+    fun postImage(tView: android.widget.TextView, buttonParam: android.widget.Button, img: android.widget.ImageView) {
+
         val thread = Thread {
             try {
                 val bitmap = BitmapFactory.decodeStream(URL(imgUrl).openStream())
                 runOnUiThread {
-                    textView.text = title
-                    imgView.setImageBitmap(bitmap)
-                    button.isEnabled = true
+                    tView.text = title
+                    img.setImageBitmap(bitmap)
+                    buttonParam.isEnabled = true
                 }
             } catch (e: IOException) {
                 runOnUiThread {
-                    textView.text = getString(R.string.img_display_failed)
-                    button.isEnabled = true
+                    tView.text = getString(R.string.img_display_failed)
+                    buttonParam.isEnabled = true
                 }
             }
         }

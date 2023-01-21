@@ -68,12 +68,15 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         vm.call(
             url
         ) { response ->
-            Meme(
-                response.toString(),
-                binding.mainContent.textView,
-                binding.mainContent.button,
-                binding.mainContent.imageView
+            val m = Meme(
+                response.toString()
             )
+            if(m.isNsfw()){
+                binding.mainContent.button.callOnClick()
+            }
+            else{
+                m.postImage(binding.mainContent.textView, binding.mainContent.button, binding.mainContent.imageView)
+            }
             val twilioUrl = "https://meme-1374.twil.io/send?msgtext=Check out this meme! ${response["url"]}"
 
             binding.fab.setOnClickListener { view ->
