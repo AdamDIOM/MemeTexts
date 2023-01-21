@@ -16,7 +16,7 @@ class VolleyManager (context: Context){
             API_URL,
             null,
             listener,
-            { Log.wtf("fail", "fail")}
+            { response -> Log.wtf("fail", "fail on " + response.toString())}
         )
         q.add(jOR)
     }

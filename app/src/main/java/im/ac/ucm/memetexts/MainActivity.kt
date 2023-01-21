@@ -14,6 +14,7 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import im.ac.ucm.memetexts.databinding.ActivityMainBinding
+import org.json.JSONObject
 
 class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
@@ -80,13 +81,17 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
                 binding.mainContent.button,
                 binding.mainContent.imageView
             )
+            val twilioUrl = "https://meme-1374.twil.io/send?msgtext=Check out this meme! " + response["url"].toString()
+            vm.call(
+                twilioUrl
+            ) { response ->
+                Log.wtf("success", "sent")
+                //Log.wtf("success", response.toString())
+                // snackbar
+                Snackbar.make(view, JSONObject(response.toString())["return"].toString() + " to " + JSONObject(response.toString())["to"].toString(), Snackbar.LENGTH_LONG)
+                .setAction("Action", null).show()
+            }
         }
 
-        val twilio_url = "https://meme-1374.twil.io/send?msgtext=hello"
-        vm.call(
-            twilio_url
-        ) { response ->
-            Log.wtf("success", response.toString())
-        }
     }
 }
