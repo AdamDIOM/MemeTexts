@@ -4,10 +4,6 @@ import android.os.Bundle
 import android.util.Log
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -18,7 +14,6 @@ import org.json.JSONObject
 
 class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
-    private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,13 +25,11 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         setSupportActionBar(binding.toolbar)
 
         binding.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+            Snackbar.make(view, resources.getString(R.string.meme_start_text), Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
         }
 
-        val options = arrayOf("any", "memes", "me_irl", "dankmemes")
-
-        binding.mainContent.spinner.adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, options)
+        binding.mainContent.spinner.adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, resources.getStringArray(R.array.spinner_options))
         binding.mainContent.spinner.onItemSelectedListener = this
     }
 
@@ -63,7 +56,7 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
     }
 
     override fun onNothingSelected(parent: AdapterView<*>?) {
-        TODO("Not yet implemented")
+        selected = "any"
     }
 
     fun buttonClick(view: View){
@@ -81,17 +74,20 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
                 binding.mainContent.button,
                 binding.mainContent.imageView
             )
-            val twilioUrl = "https://meme-1374.twil.io/send?msgtext=Check out this meme! " + response["url"].toString()
-            vm.call(
-                twilioUrl
-            ) { response ->
-                Log.wtf("success", "sent")
-                //Log.wtf("success", response.toString())
-                // snackbar
-                Snackbar.make(view, JSONObject(response.toString())["return"].toString() + " to " + JSONObject(response.toString())["to"].toString(), Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
+            val twilioUrl = "https://meme-1374.twil.io/send?msgtext=Check out this meme! ${response["url"]}"
+
+            binding.fab.setOnClickListener { view ->
+                //add to db here
+                TODO("move to from db")
+                vm.call(
+                    twilioUrl
+                ) { response ->
+                    //Log.wtf("success", response.toString())
+                    val obj = JSONObject(response.toString())
+                    Snackbar.make(view, "${obj["return"]} to ${obj["to"]}", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show()
+                }
             }
         }
-
     }
 }
