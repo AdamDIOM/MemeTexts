@@ -13,7 +13,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.activity.result.contract.ActivityResultContracts
 import im.ac.ucm.memetexts.databinding.ActivityMainBinding
-import org.json.JSONObject
+import java.io.Serializable
 
 class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
@@ -68,7 +68,9 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         val intent = Intent(this, DBViewActivity::class.java)
-        intent.putExtra("db", DbManager::class.java)
+        intent.putExtra("db", dbManager.retrieve() as Serializable)
+
+        intent.putExtra("test", "test")
 
         return when (item.itemId) {
             R.id.action_view_db -> {
@@ -105,31 +107,20 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
                 binding.mainContent.button.callOnClick()
             }
             else{
-                m.postImage(binding.mainContent.textView, binding.mainContent.button, binding.mainContent.imageView)
+                m.postImage(binding.mainContent.textView, binding.mainContent.imageView, binding.mainContent.button)
             }
-            val twilioUrl = "https://meme-1374.twil.io/send?msgtext=Check out this meme! ${response["url"]}"
 
             binding.fab.setOnClickListener { view ->
                 //add to db here
                 dbManager.create(m)
-                //TODO("move to from db")
-                vm.call(
-                    twilioUrl,
-                    { response ->
-                        //Log.wtf("success", response.toString())
-                        val obj = JSONObject(response.toString())
-                        Snackbar.make(
-                            view,
-                            "${obj["return"]} to ${obj["to"]}",
-                            Snackbar.LENGTH_LONG
-                        )
-                            .setAction("Action", null).show()
-                    },
-                    { response ->
-                        Log.wtf("twilio", "twilio failed")
-
-                    }
+                Snackbar.make(
+                    view,
+                    "Added ${m.getPostTitle()} to Database!",
+                    Snackbar.LENGTH_LONG
                 )
+                    .setAction("Action", null).show()
+                //TODO("move to from db")
+
             }
         },
         { response ->

@@ -6,7 +6,7 @@ import org.json.JSONObject
 import java.io.IOException
 import java.net.URL
 
-class Meme(t: String, pL: String, u: String, n: Boolean): AppCompatActivity(){
+class Meme(t: String, pL: String, u: String, n: Boolean): AppCompatActivity(), java.io.Serializable{
 
     private val title: String
     private val postLink: String
@@ -43,7 +43,7 @@ class Meme(t: String, pL: String, u: String, n: Boolean): AppCompatActivity(){
         return imgUrl
     }
 
-    fun postImage(tView: android.widget.TextView, buttonParam: android.widget.Button, img: android.widget.ImageView) {
+    fun postImage(tView: android.widget.TextView, img: android.widget.ImageView, buttonParam: android.widget.Button) {
 
         val thread = Thread {
             try {
@@ -57,6 +57,23 @@ class Meme(t: String, pL: String, u: String, n: Boolean): AppCompatActivity(){
                 runOnUiThread {
                     tView.text = getString(R.string.img_display_failed)
                     buttonParam.isEnabled = true
+                }
+            }
+        }
+        thread.start()
+    }
+
+    fun postImageViewOnly(tView: android.widget.TextView, img: android.widget.ImageView){
+        val thread = Thread {
+            try {
+                val bitmap = BitmapFactory.decodeStream(URL(imgUrl).openStream())
+                runOnUiThread {
+                    tView.text = title
+                    img.setImageBitmap(bitmap)
+                }
+            } catch (e: IOException) {
+                runOnUiThread {
+                    tView.text = getString(R.string.img_display_failed)
                 }
             }
         }

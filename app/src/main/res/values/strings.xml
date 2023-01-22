@@ -7,6 +7,7 @@
     <string name="img_display_failed">Image display failed. Try again</string>
     <string name="get_meme_button">Get meme</string>
     <string name="meme_start_text">Hit \"Get Meme\" button to start</string>
+    <string name="send_to_phone">Send to phone</string>
 
     <string-array name="spinner_options">
         <item>any</item>

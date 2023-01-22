@@ -4,7 +4,7 @@ import android.content.ContentValues
 import android.content.Context
 import java.util.*
 
-class DbManager(context: Context) {
+class DbManager(context: Context): java.io.Serializable {
     private var helper: DbHelper = DbHelper(context)
 
     fun create(meme: Meme){
