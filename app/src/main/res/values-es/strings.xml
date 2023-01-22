@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MemeTexts</string>
+    <string name="action_return">Retroceder</string>
+    <string name="action_view_db">Ver base de datos</string>
+    <string name="get_meme_button">Obtener meme</string>
+    <string name="img_display_failed">La visualización de la imagen falló. Intentar otra vez</string>
+    <string name="meme_start_text">Para comenzar, presione el botón \"Obtener meme\"</string>
+    <string name="send_to_phone">Enviar al teléfono</string>
+</resources>
