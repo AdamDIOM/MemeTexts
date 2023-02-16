@@ -7,4 +7,13 @@
     <string name="img_display_failed">La visualización de la imagen falló. Intentar otra vez</string>
     <string name="meme_start_text">Para comenzar, presione el botón \"Obtener meme\"</string>
     <string name="send_to_phone">Enviar al teléfono</string>
+    <string name="settings">Settings (translate!)</string>
+    <string name="title_activity_settings">SettingsActivity (translate!)</string>
+
+    <string-array name="spinner_options">
+        <item>cualquier</item>
+        <item>memes</item>
+        <item>me_irl</item>
+        <item>dankmemes</item>
+    </string-array>
 </resources>

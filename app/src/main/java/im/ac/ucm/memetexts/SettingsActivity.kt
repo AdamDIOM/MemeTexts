@@ -1,33 +1,27 @@
 package im.ac.ucm.memetexts
 
-import android.app.Activity
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.TableLayout
-import androidx.recyclerview.widget.LinearLayoutManager
-import im.ac.ucm.memetexts.databinding.ActivityDbviewBinding
+import com.google.android.material.snackbar.Snackbar
+import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.navigateUp
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.preference.PreferenceFragmentCompat
+import im.ac.ucm.memetexts.databinding.ActivitySettingsBinding
 
-class DBViewActivity : AppCompatActivity() {
+class SettingsActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityDbviewBinding
-    private lateinit var memeAdapter: MemeAdapter
+    private lateinit var binding: ActivitySettingsBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityDbviewBinding.inflate(layoutInflater)
+        binding = ActivitySettingsBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        val memesList = intent.getSerializableExtra("db") as MutableList<Meme>
-        Log.wtf("mtblist", memesList.toString())
 
-        binding.recyclerView.layoutManager = LinearLayoutManager(this)
-        memeAdapter = MemeAdapter()
-        binding.recyclerView.adapter = memeAdapter
-        (binding.recyclerView.adapter as MemeAdapter).memes = memesList
-        (binding.recyclerView.adapter as MemeAdapter)?.notifyDataSetChanged()
+        setSupportActionBar(binding.toolbar)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

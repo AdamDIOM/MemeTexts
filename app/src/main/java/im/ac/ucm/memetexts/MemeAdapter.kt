@@ -23,6 +23,13 @@ class MemeAdapter : RecyclerView.Adapter<MemeAdapter.MemeViewHolder>() {
         return MemeViewHolder(view)
     }
 
+    private fun createSnackBar(view: View, text: String){
+        Snackbar.make(
+            view,
+            text,
+            Snackbar.LENGTH_LONG
+        ).show()
+    }
     override fun onBindViewHolder(holder: MemeViewHolder, position: Int) {
         val meme = memes[position]
         Log.wtf("meme", meme.toString())
@@ -36,20 +43,13 @@ class MemeAdapter : RecyclerView.Adapter<MemeAdapter.MemeViewHolder>() {
                 { response ->
                     //Log.wtf("success", response.toString())
                     val obj = JSONObject(response.toString())
-                    Snackbar.make(
-                        view,
-                        "${obj["return"]} to ${obj["to"]}",
-                        Snackbar.LENGTH_LONG
-                    )
-                        .setAction("Action", null).show()
+                    createSnackBar(view, "${obj["return"]} to ${obj["to"]}")
                 },
                 { response ->
-                    Log.wtf("twilio", "twilio failed")
-
+                    createSnackBar(view, "Send to phone failed")
                 }
             )
         }
-
     }
 
     override fun getItemCount(): Int {
