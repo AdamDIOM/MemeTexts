@@ -7,8 +7,14 @@
     <string name="img_display_failed">La visualización de la imagen falló. Intentar otra vez</string>
     <string name="meme_start_text">Para comenzar, presione el botón \"Obtener meme\"</string>
     <string name="send_to_phone">Enviar al teléfono</string>
-    <string name="settings">Settings (translate!)</string>
-    <string name="title_activity_settings">SettingsActivity (translate!)</string>
+    <string name="settings">Configuración</string> <!--TODO -->
+    <string name="title_activity_settings">ConfiguraciónActividad</string>
+    <string name="no_internet">Sin acceso a Internet. Vuelva a conectar.</string>
+    <string name="retrieval_failed">La recuperación del meme falló. Intentar otra vez.</string>
+    <string name="send_to_phone_failed">Error al enviar al teléfono. Vuelva a intentarlo más tarde.</string>
+    <string name="fab_alt_text">icono de estrella utilizado para favorecer el meme</string>
+    <string name="add_phone_num">[agregar el número de teléfono]</string>
+    <string name="view_similar">ver meme similar</string>
 
     <string-array name="spinner_options">
         <item>cualquier</item>

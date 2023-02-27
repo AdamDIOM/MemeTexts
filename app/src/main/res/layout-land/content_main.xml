@@ -8,9 +8,10 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="413dp"
-        android:layout_height="259dp"
-        android:layout_marginBottom="92dp"
+        android:layout_width="354dp"
+        android:layout_height="389dp"
+        android:layout_marginStart="376dp"
+        android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         tools:srcCompat="@tools:sample/avatars" />
@@ -18,8 +19,13 @@
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentContainerView"
         android:name="im.ac.ucm.memetexts.main.GetMemeFragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="338dp"
+        android:layout_height="389dp"
+        android:layout_marginTop="4dp"
         android:tag="get_meme_fragment_tag"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.04"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:layout="@layout/fragment_get_meme" />
 </androidx.constraintlayout.widget.ConstraintLayout>

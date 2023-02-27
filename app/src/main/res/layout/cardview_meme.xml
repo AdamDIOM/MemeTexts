@@ -3,30 +3,67 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp">
 
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/delete_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".1"
+                android:text="x"
+                />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".9" />
+
+        </LinearLayout>
 
         <ImageView
             android:id="@+id/imageView2"
             android:layout_width="199dp"
             android:layout_height="182dp"
-            tools:srcCompat="@tools:sample/avatars" />
+            tools:srcCompat="@tools:sample/avatars"
+            android:layout_marginTop="10dp"/>
 
         <TextView
             android:id="@+id/textView"
             android:layout_width="match_parent"
-            android:layout_height="43dp"
+            android:layout_height="wrap_content"
             android:baselineAligned="false"
-            android:text="" />
+            android:text=""
+            android:textAlignment="center"
+            android:layout_marginTop="5dp"/>
 
-        <Button
-            android:id="@+id/button"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/send_to_phone" />
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/send_to_phone_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".5"
+                android:text="@string/send_to_phone"
+                android:layout_margin="5dp"/>
+            <Button
+                android:id="@+id/get_similar_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".5"
+                android:text="@string/view_similar"
+                android:layout_margin="5dp"/>
+        </LinearLayout>
     </TableLayout>
 </androidx.cardview.widget.CardView>

@@ -1,4 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <SwitchPreference android:key="allow_nsfw"
+        android:title="Allow NSFW"
+        android:summary="Allow Memes that are Not Safe For Work (NSFW)"
+        android:defaultValue="false" />
+
+    <EditTextPreference android:key="phone_num"
+        android:title="Phone number"
+        android:summary="Number required to enable send to phone functionality. Format: +[dialling code][area code][number]"
+        android:defaultValue="" />
+
+    <EditTextPreference android:key="extra_meme"
+        android:title="Personalised Meme Subreddit"
+        android:summary="Enter your own alternative meme Subreddit to get memes from. No need to include 'r/' in the custom Subreddit."
+        android:defaultValue="[Change Me]" />
+
+    <PreferenceCategory android:key="category_text_text"
+        android:title="Pre- and Post-Meme text"
+        android:summary="Enter custom text to go before and after the meme in Send To Phone">
+
+        <EditTextPreference android:key="pre_text"
+            android:title="Pre-Meme text"
+            android:defaultValue="Check out this meme! " />
+
+        <EditTextPreference android:key="post_text"
+            android:title="Post-Meme text"
+            android:defaultValue="" />
+
+    </PreferenceCategory>
+
+
 </androidx.preference.PreferenceScreen>

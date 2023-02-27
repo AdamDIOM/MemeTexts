@@ -12,6 +12,10 @@
     <string name="title_activity_settings">SettingsActivity</string>
     <string name="no_internet">No internet access. Please reconnect.</string>
     <string name="retrieval_failed">Meme retrieval failed. Try again.</string>
+    <string name="send_to_phone_failed">Send to phone failed. Try again later.</string>
+    <string name="fab_alt_text">star icon used for favouring meme</string>
+    <string name="add_phone_num">[add phone num]</string>
+    <string name="view_similar">View Similar</string>
 
     <string-array name="spinner_options">
         <item>any</item>
